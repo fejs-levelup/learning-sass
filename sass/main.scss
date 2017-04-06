@@ -1,5 +1,57 @@
-$main-bg: #eee;
-
-body {
-  background: $main-bg;
+* {
+  margin: 0;
+  padding: 0;
 }
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin colored-button($color: #fff, $bg: #333, $border: #333) {
+  border-radius: 5px;
+  border: 2px solid $border;
+  background: $bg;
+  color: $color;
+}
+
+$new-defaults: (color: blue, border: yellow);
+
+nav {
+  ul {
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  a {
+    @include colored-button($new-defaults...);
+    @include square(30px);
+    text-transform: uppercase;
+    display: inline-block;
+
+    padding: {
+      top: 20px;
+      bottom: 5px;
+    }
+
+    font: {
+      size: 12px;
+      weight: bold;
+      family: arial;
+    }
+  }
+}
+
+p {
+  @include colored-button(green);
+  @include square(50px);
+}
+
+.default-container {
+  @include square()
+}
+
+@import "_extra";
