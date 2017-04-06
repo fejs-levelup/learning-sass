@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-@mixin square($size) {
+@mixin square($size: 10px) {
   width: $size;
   height: $size;
 }
@@ -45,13 +45,46 @@ nav {
   }
 }
 
-p {
-  @include colored-button(green);
-  @include square(50px);
+// p {
+//   @include colored-button(green);
+//   @include square(50px);
+// }
+
+div%another-placeholder {
+  &::after {
+    content: "it's div"
+  }
 }
 
-.default-container {
-  @include square()
+p%placeh {
+  @include square(150px);
+  background: #333;
+  color: white;
+}
+
+.extended-container {
+  @extend %placeh;
+  @extend %another-placeholder;
+
+  font-size: 20px;
+
+  &:hover {
+    background: darken(#333, 50%);
+  }
+}
+
+@mixin user-icon($icon, $width, $height) {
+  width: $width;
+  height: $height;
+  background: url(../img/#{$icon}/#{$width}-#{$height}.png);
+}
+
+.small-icon {
+  @include user-icon(user, 24px, 24px);
+}
+
+.big-icon {
+  @include user-icon(user, 128px, 128px);
 }
 
 @import "_extra";
